@@ -1,11 +1,6 @@
 class ZATCA::UBL::CommonAggregateComponents::DocumentReference < ZATCA::UBL::BaseComponent
   attr_reader :id, :issue_date, :issue_time, :document_type_code
 
-  # id: invoice_data[:invoice_number], # KSA-26 Prepayment Invoice ID
-  #   issue_date: parse_date(invoice_data[:invoice_date]), # KSA-28 Prepayment Issue Date
-  #   issue_time: parse_time(invoice_data[:invoice_time]),# KSA-29 Prepayment Issue Time
-  #   document_type_code: "386" # Prepayment document type KSA-30
-
   def initialize(id:, issue_date:, issue_time:, document_type_code: "386")
     super()
 
