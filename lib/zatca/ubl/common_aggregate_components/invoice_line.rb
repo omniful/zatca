@@ -31,7 +31,7 @@ class ZATCA::UBL::CommonAggregateComponents::InvoiceLine < ZATCA::UBL::BaseCompo
   def initialize(
     invoiced_quantity:, invoiced_quantity_unit_code:,
     line_extension_amount:, tax_total:, item:,
-    price:, allowance_charge: nil, currency_id: "SAR"
+    price:, allowance_charge: nil, document_reference: nil, currency_id: "SAR"
   )
     super()
 
@@ -42,6 +42,7 @@ class ZATCA::UBL::CommonAggregateComponents::InvoiceLine < ZATCA::UBL::BaseCompo
     @item = item
     @price = price
     @allowance_charge = allowance_charge
+    @document_reference = document_reference
     @currency_id = currency_id
   end
 
@@ -54,6 +55,7 @@ class ZATCA::UBL::CommonAggregateComponents::InvoiceLine < ZATCA::UBL::BaseCompo
       ZATCA::UBL::BaseComponent.new(name: "cbc:ID", value: index),
       ZATCA::UBL::BaseComponent.new(name: "cbc:InvoicedQuantity", value: @invoiced_quantity, attributes: {unitCode: @invoiced_quantity_unit_code}),
       ZATCA::UBL::BaseComponent.new(name: "cbc:LineExtensionAmount", value: @line_extension_amount, attributes: {currencyID: @currency_id}),
+      @document_reference,
       @tax_total,
       @item,
       @price,
