@@ -176,10 +176,19 @@ class ZATCA::UBL::Invoice < ZATCA::UBL::BaseComponent
       remove_root_xml_tag: true
     )
 
-    File.write("xml_for_signing.xml", canonicalized_xml)
+    # File.write("xml_for_signing.xml", canonicalized_xml)
 
     ZATCA::Hashing.generate_hashes(canonicalized_xml)[:base64]
   end
+
+  def canonicalized_xml
+    generate_unsigned_xml(
+      canonicalized: true,
+      apply_invoice_hacks: false,
+      remove_root_xml_tag: true
+    )
+  end
+
 
   # When submitting to ZATCA, we need to submit the XML in Base64 format, and it
   # needs to be pretty-printed matching their indentation style.
